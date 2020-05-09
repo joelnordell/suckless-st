@@ -1,0 +1,6 @@
+st
+st.o
+x.o
+hb.o
+*.orig
+patches
