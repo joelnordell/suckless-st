@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Simple Terminal
+#GenericName=Terminal
+Comment=suckless.org simple terminal emulator
+Exec="%DESTDIR%/bin/st"
+Path=%DESTDIR%/bin/st
+Terminal=false
+Type=Application
+#Encoding=UTF-8
+Icon=%DESTDIR%/share/icons/512x512/apps/st.png
+Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;cmd;

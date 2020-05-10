@@ -49,10 +49,18 @@ install: st
 	sed "s/VERSION/$(VERSION)/g" < st.1 > $(DESTDIR)$(MANPREFIX)/man1/st.1
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
 	tic -sx st.info
+	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
+	sed -e "s:%DESTDIR%:$(DESTDIR)$(PREFIX):g" share/applications/st.desktop > $(DESTDIR)$(PREFIX)/share/applications/st.desktop
+	mkdir -p $(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps
+	mkdir -p $(DESTDIR)$(PREFIX)/share/icons/hicolor/512x512/apps
+	cp -f share/icons/hicolor/scalable/apps/st.svg $(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps
+	cp -f share/icons/hicolor/512x512/apps/st.png $(DESTDIR)$(PREFIX)/share/icons/hicolor/512x512/apps
 	@echo Please see the README file regarding the terminfo entry of st.
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
+	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop
+	rm -f $(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps/st.svg
 
 .PHONY: all options clean dist install uninstall
