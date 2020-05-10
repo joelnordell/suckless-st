@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=st
-Comment=simple-terminal emulator for X
+Name=Simple Terminal
+Comment=simple terminal emulator for X
 Icon=st
 Exec=%DESTDIR%/bin/st
 Categories=System;TerminalEmulator
