@@ -243,6 +243,7 @@ static int frccap = 0;
 static char *usedfont = NULL;
 static double usedfontsize = 0;
 static double defaultfontsize = 0;
+static int usedfontispixel = 0;
 
 static char *opt_class = NULL;
 static char **opt_cmd  = NULL;
@@ -967,15 +968,17 @@ xloadfonts(char *fontstr, double fontsize)
 	if (fontsize > 1) {
 		FcPatternDel(pattern, FC_PIXEL_SIZE);
 		FcPatternDel(pattern, FC_SIZE);
-		FcPatternAddDouble(pattern, FC_PIXEL_SIZE, (double)fontsize);
+		FcPatternAddDouble(pattern, usedfontispixel ? FC_PIXEL_SIZE : FC_SIZE, (double)fontsize);
 		usedfontsize = fontsize;
 	} else {
 		if (FcPatternGetDouble(pattern, FC_PIXEL_SIZE, 0, &fontval) ==
 				FcResultMatch) {
 			usedfontsize = fontval;
+			usedfontispixel = 1;
 		} else if (FcPatternGetDouble(pattern, FC_SIZE, 0, &fontval) ==
 				FcResultMatch) {
-			usedfontsize = -1;
+			usedfontsize = fontval;
+			usedfontispixel = 0;
 		} else {
 			/*
 			 * Default font size is 12, if none given. This is to
@@ -983,6 +986,7 @@ xloadfonts(char *fontstr, double fontsize)
 			 */
 			FcPatternAddDouble(pattern, FC_PIXEL_SIZE, 12);
 			usedfontsize = 12;
+			usedfontispixel = 1;
 		}
 		defaultfontsize = usedfontsize;
 	}
