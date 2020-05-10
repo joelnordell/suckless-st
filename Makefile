@@ -52,9 +52,9 @@ install: st
 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
 	sed -e "s:%DESTDIR%:$(DESTDIR)$(PREFIX):g" share/applications/st.desktop > $(DESTDIR)$(PREFIX)/share/applications/st.desktop
 	mkdir -p $(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps
-	mkdir -p $(DESTDIR)$(PREFIX)/share/icons/hicolor/512x512/apps
+	for i in 128 16 24 256 32 48 512 64; do mkdir -p $(DESTDIR)$(PREFIX)/share/icons/hicolor/$${i}x$${i}/apps; done
 	cp -f share/icons/hicolor/scalable/apps/st.svg $(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps
-	cp -f share/icons/hicolor/512x512/apps/st.png $(DESTDIR)$(PREFIX)/share/icons/hicolor/512x512/apps
+	for i in 128 16 24 256 32 48 512 64; do cp -f share/icons/hicolor/$${i}x$${i}/apps/st.png $(DESTDIR)$(PREFIX)/share/icons/hicolor/$${i}x$${i}/apps; done
 	@echo Please see the README file regarding the terminfo entry of st.
 
 uninstall:
@@ -62,5 +62,6 @@ uninstall:
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop
 	rm -f $(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps/st.svg
+	for i in 128 16 24 256 32 48 512 64; do rm -f $(DESTDIR)$(PREFIX)/share/icons/hicolor/$${i}x$${i}/apps/st.png; done
 
 .PHONY: all options clean dist install uninstall
